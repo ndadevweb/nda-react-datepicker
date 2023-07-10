@@ -1,0 +1,58 @@
+{
+  "name": "nda-react-datepicker",
+  "version": "1.0.1",
+  "description": "A React DatePicker to select a date in the calendar",
+  "author": "Nicolas D",
+  "license": "ISC",
+  "keywords": [
+    "react",
+    "datepicker",
+    "component"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndadevweb/nda-react-datepicker.git"
+  },
+  "private": false,
+  "dependencies": {
+    "@babel/cli": "^7.22.6",
+    "@babel/core": "^7.22.8",
+    "@babel/preset-env": "^7.22.7",
+    "@babel/preset-react": "^7.22.5",
+    "css-loader": "^6.8.1",
+    "style-loader": "^3.3.3",
+    "url-loader": "^4.1.1"
+  },
+  "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "babel README.md src/lib -d dist --copy-files"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
