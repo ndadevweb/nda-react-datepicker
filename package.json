@@ -1,6 +1,6 @@
 {
   "name": "nda-react-datepicker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A React DatePicker to select a date in the calendar",
   "author": "Nicolas D",
   "license": "ISC",
@@ -10,7 +10,6 @@
     "component"
   ],
   "main": "dist/index.js",
-  "module": "dist/index",
   "files": [
     "dist"
   ],
