@@ -17,9 +17,13 @@ import classes from './DatePicker.module.css'
  */
 export default function DatePicker({ dateSelected, updateSelectedDate, themes = {} }) {
 
-  const [currentDate, setCurrentDate] = useState(new Date())
+  const defaultDate = dateSelected
+    ? new Date(dateSelected)
+    : new Date()
 
-  const [period, setPeriod] = useState(new Date())
+  const [currentDate, setCurrentDate] = useState(defaultDate)
+
+  const [period, setPeriod] = useState(defaultDate)
 
   useEffect(() => {
     if(isDateValid(dateSelected) === true) {

@@ -181,4 +181,6 @@ Contains the date of the day
 
 **.customThemeDayCellDay:hover, .customThemeDayCellDaySelected:hover** to change background or another styles when the date is over
 
+**.customThemeDayCellDayToday** to change backgroud or another style when is today and the date is not selected
+
 **.customThemeDayCellDayAnotherMonth** to change background or another styles of the days displayed not corresponding to month days of the current month

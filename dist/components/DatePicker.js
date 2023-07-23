@@ -20,8 +20,9 @@ export default function DatePicker({
   updateSelectedDate,
   themes = {}
 }) {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [period, setPeriod] = useState(new Date());
+  const defaultDate = dateSelected ? new Date(dateSelected) : new Date();
+  const [currentDate, setCurrentDate] = useState(defaultDate);
+  const [period, setPeriod] = useState(defaultDate);
   useEffect(() => {
     if (isDateValid(dateSelected) === true) {
       const newDate = new Date(dateSelected);
