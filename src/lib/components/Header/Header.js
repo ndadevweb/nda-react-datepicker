@@ -9,13 +9,13 @@ import classes from './Header.module.css'
  * Component to handle the period change of the calendar
  *
  * @param {Object}   props
- * @param {Date}     props.dateSelected
- * @param {Function} props.updateDate
- * @param {Object}   props.themes
+ * @param {Date}     props.period       period of the calendar
+ * @param {Function} props.updatePeriod callback to update the date of the period
+ * @param {Object}   props.themes       object containing css classes to custom theme
  *
- * @returns <Header dateSelected={ ... } updateDate={ ... } />
+ * @returns <Header period={ ... } updatePeriod={ ... } themes={ ... } />
  */
-export default function Header({ dateSelected, updateDate, themes }) {
+export default function Header({ period, updatePeriod, themes }) {
 
   const INDEX_MONTH_DECEMBER = 11
   const INDEX_MONTH_JANUARY = 0
@@ -27,14 +27,16 @@ export default function Header({ dateSelected, updateDate, themes }) {
    * @returns {Date}
    */
   function changePeriodToLeft() {
-    if(dateSelected.getMonth() === INDEX_MONTH_JANUARY) {
-      dateSelected.setMonth(INDEX_MONTH_DECEMBER)
-      dateSelected.setFullYear(dateSelected.getFullYear() - 1)
+    const newPeriod = new Date(period)
+
+    if(newPeriod.getMonth() === INDEX_MONTH_JANUARY) {
+      newPeriod.setMonth(INDEX_MONTH_DECEMBER)
+      newPeriod.setFullYear(newPeriod.getFullYear() - 1)
     } else {
-      dateSelected.setMonth(dateSelected.getMonth() - 1)
+      newPeriod.setMonth(newPeriod.getMonth() - 1)
     }
 
-    return dateSelected
+    return newPeriod
   }
 
   /**
@@ -44,14 +46,16 @@ export default function Header({ dateSelected, updateDate, themes }) {
    * @returns {Date}
    */
   function changePeriodToRight() {
-    if(dateSelected.getMonth() === INDEX_MONTH_DECEMBER) {
-      dateSelected.setMonth(INDEX_MONTH_JANUARY)
-      dateSelected.setFullYear(dateSelected.getFullYear() + 1)
+    const newPeriod = new Date(period)
+
+    if(newPeriod.getMonth() === INDEX_MONTH_DECEMBER) {
+      newPeriod.setMonth(INDEX_MONTH_JANUARY)
+      newPeriod.setFullYear(newPeriod.getFullYear() + 1)
     } else {
-      dateSelected.setMonth(dateSelected.getMonth() + 1)
+      newPeriod.setMonth(newPeriod.getMonth() + 1)
     }
 
-    return dateSelected
+    return newPeriod
   }
 
   function themeActions() {
@@ -68,25 +72,25 @@ export default function Header({ dateSelected, updateDate, themes }) {
     <tr>
       <td colSpan={ 7 }>
         <div className={ themeActions() }>
-          <button type="button" className={ classes.buttonLeft } onClick={ () => updateDate(changePeriodToLeft()) }>
+          <button type="button" className={ classes.buttonLeft } onClick={ () => updatePeriod(changePeriodToLeft()) }>
             <img src={ triangleImage } className={ classes.triangleLeft } alt="Left" />
           </button>
 
-          <button type="button" onClick={ () => updateDate(new Date()) }>
+          <button type="button" onClick={ () => updatePeriod(new Date()) }>
             <img src={ homeImage } className={ classes.home } alt="Home" />
           </button>
 
           <SelectMonthNames
-            dateSelected={ dateSelected }
-            updateDate={ updateDate }
+            period={ period }
+            updatePeriod={ updatePeriod }
           />
 
           <SelectYears
-            dateSelected={ dateSelected }
-            updateDate={ updateDate }
+            period={ period }
+            updatePeriod={ updatePeriod }
           />
 
-          <button type="button" className={ classes.buttonRight} onClick={ () => updateDate(changePeriodToRight()) }>
+          <button type="button" className={ classes.buttonRight} onClick={ () => updatePeriod(changePeriodToRight()) }>
             <img src={ triangleImage } className={ classes.trianglerRight } alt="Right" />
           </button>
         </div>

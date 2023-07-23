@@ -5,12 +5,12 @@ import React from 'react'
  * between 1950 and 2050
  *
  * @param {Object}   props
- * @param {Date}     props.dateSelected
- * @param {Function} props.updateDate
+ * @param {Date}     props.period       period date of the calendar
+ * @param {Function} props.updatePeriod callback to update the period date of the calendar
  *
- * @returns <Year dateSelected={ ... } updateDate={ ... } />
+ * @returns <Year period={ ... } updatePeriod={ ... } />
  */
-export default function Years({ dateSelected, updateDate }) {
+export default function Years({ period, updatePeriod }) {
 
   const startYear = 1950
   const endYear = 2050
@@ -22,13 +22,13 @@ export default function Years({ dateSelected, updateDate }) {
    * @param {String} year
    */
   function handleChangeYear(year) {
-    dateSelected.setFullYear(year)
+    period.setFullYear(year)
 
-    updateDate(dateSelected)
+    updatePeriod(period)
   }
 
   return (
-    <select value={ dateSelected.getFullYear() } onChange={ (event) => handleChangeYear(event.target.value) }>
+    <select value={ period.getFullYear() } onChange={ (event) => handleChangeYear(event.target.value) }>
       {
         years.map((year, index) => <option key={ index } value={ year }>{ year }</option>)
       }

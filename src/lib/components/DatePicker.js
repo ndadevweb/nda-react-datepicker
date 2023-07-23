@@ -9,25 +9,30 @@ import classes from './DatePicker.module.css'
  * DatePicker component
  *
  * @param {Object}   props
- * @param {Date}     props.dateSelected
- * @param {Function} props.updateInputDate
- * @param {Object}   props.themes
+ * @param {Date}     props.dateSelected    date selected by the user
+ * @param {Function} props.updateSelectedDate callback to update the date selected by the user
+ * @param {Object}   props.themes          object containing css classes to custom theme
  *
- * @returns <DatePicker dateSelected={ ... } updateInputDate={ ... } />
+ * @returns <DatePicker dateSelected={ ... } updateSelectedDate={ ... } themes={ ... }/>
  */
-export default function DatePicker({ dateSelected, updateInputDate, themes = {} }) {
+export default function DatePicker({ dateSelected, updateSelectedDate, themes = {} }) {
 
-  const defaultDate = new Date()
-  const [currentDate, setCurrentDate] = useState(defaultDate)
+  const [currentDate, setCurrentDate] = useState(new Date())
+
+  const [period, setPeriod] = useState(new Date())
 
   useEffect(() => {
     if(isDateValid(dateSelected) === true) {
       const newDate = new Date(dateSelected)
 
       setCurrentDate(newDate)
+      setPeriod(newDate)
     }
   }, [dateSelected])
 
+  /**
+   * Return a string containing css classes
+   */
   function themeContainer() {
     const classesList = [classes.container]
 
@@ -43,8 +48,8 @@ export default function DatePicker({ dateSelected, updateInputDate, themes = {} 
       <table>
         <thead>
           <Header
-            dateSelected={ currentDate }
-            updateDate={ (newDate) => setCurrentDate(new Date(newDate)) }
+            period={ period }
+            updatePeriod={ (newDate) => setPeriod(new Date(newDate))}
             themes={ themes }
           />
         </thead>
@@ -52,7 +57,9 @@ export default function DatePicker({ dateSelected, updateInputDate, themes = {} 
           <DayNames themes={ themes } />
           <DayNumbers
             dateSelected={ currentDate }
-            updateInputDate={ (newDate) => updateInputDate(dateToFormat(newDate)) }
+            updateSelectedDate={ (newDate) => updateSelectedDate(dateToFormat(newDate)) }
+            period={ period }
+            updatePeriod={ (newDate) => setPeriod(dateToFormat(newDate)) }
             themes={ themes }
           />
         </tbody>

@@ -9,25 +9,30 @@ import classes from './DatePicker.module.css';
  * DatePicker component
  *
  * @param {Object}   props
- * @param {Date}     props.dateSelected
- * @param {Function} props.updateInputDate
- * @param {Object}   props.themes
+ * @param {Date}     props.dateSelected    date selected by the user
+ * @param {Function} props.updateSelectedDate callback to update the date selected by the user
+ * @param {Object}   props.themes          object containing css classes to custom theme
  *
- * @returns <DatePicker dateSelected={ ... } updateInputDate={ ... } />
+ * @returns <DatePicker dateSelected={ ... } updateSelectedDate={ ... } themes={ ... }/>
  */
 export default function DatePicker({
   dateSelected,
-  updateInputDate,
+  updateSelectedDate,
   themes = {}
 }) {
-  const defaultDate = new Date();
-  const [currentDate, setCurrentDate] = useState(defaultDate);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [period, setPeriod] = useState(new Date());
   useEffect(() => {
     if (isDateValid(dateSelected) === true) {
       const newDate = new Date(dateSelected);
       setCurrentDate(newDate);
+      setPeriod(newDate);
     }
   }, [dateSelected]);
+
+  /**
+   * Return a string containing css classes
+   */
   function themeContainer() {
     const classesList = [classes.container];
     if (themes?.customThemeContainer !== undefined) {
@@ -38,14 +43,16 @@ export default function DatePicker({
   return /*#__PURE__*/React.createElement("div", {
     className: themeContainer()
   }, /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement(Header, {
-    dateSelected: currentDate,
-    updateDate: newDate => setCurrentDate(new Date(newDate)),
+    period: period,
+    updatePeriod: newDate => setPeriod(new Date(newDate)),
     themes: themes
   })), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement(DayNames, {
     themes: themes
   }), /*#__PURE__*/React.createElement(DayNumbers, {
     dateSelected: currentDate,
-    updateInputDate: newDate => updateInputDate(dateToFormat(newDate)),
+    updateSelectedDate: newDate => updateSelectedDate(dateToFormat(newDate)),
+    period: period,
+    updatePeriod: newDate => setPeriod(dateToFormat(newDate)),
     themes: themes
   }))));
 }

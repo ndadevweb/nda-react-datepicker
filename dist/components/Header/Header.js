@@ -9,15 +9,15 @@ import classes from './Header.module.css';
  * Component to handle the period change of the calendar
  *
  * @param {Object}   props
- * @param {Date}     props.dateSelected
- * @param {Function} props.updateDate
- * @param {Object}   props.themes
+ * @param {Date}     props.period       period of the calendar
+ * @param {Function} props.updatePeriod callback to update the date of the period
+ * @param {Object}   props.themes       object containing css classes to custom theme
  *
- * @returns <Header dateSelected={ ... } updateDate={ ... } />
+ * @returns <Header period={ ... } updatePeriod={ ... } themes={ ... } />
  */
 export default function Header({
-  dateSelected,
-  updateDate,
+  period,
+  updatePeriod,
   themes
 }) {
   const INDEX_MONTH_DECEMBER = 11;
@@ -30,13 +30,14 @@ export default function Header({
    * @returns {Date}
    */
   function changePeriodToLeft() {
-    if (dateSelected.getMonth() === INDEX_MONTH_JANUARY) {
-      dateSelected.setMonth(INDEX_MONTH_DECEMBER);
-      dateSelected.setFullYear(dateSelected.getFullYear() - 1);
+    const newPeriod = new Date(period);
+    if (newPeriod.getMonth() === INDEX_MONTH_JANUARY) {
+      newPeriod.setMonth(INDEX_MONTH_DECEMBER);
+      newPeriod.setFullYear(newPeriod.getFullYear() - 1);
     } else {
-      dateSelected.setMonth(dateSelected.getMonth() - 1);
+      newPeriod.setMonth(newPeriod.getMonth() - 1);
     }
-    return dateSelected;
+    return newPeriod;
   }
 
   /**
@@ -46,13 +47,14 @@ export default function Header({
    * @returns {Date}
    */
   function changePeriodToRight() {
-    if (dateSelected.getMonth() === INDEX_MONTH_DECEMBER) {
-      dateSelected.setMonth(INDEX_MONTH_JANUARY);
-      dateSelected.setFullYear(dateSelected.getFullYear() + 1);
+    const newPeriod = new Date(period);
+    if (newPeriod.getMonth() === INDEX_MONTH_DECEMBER) {
+      newPeriod.setMonth(INDEX_MONTH_JANUARY);
+      newPeriod.setFullYear(newPeriod.getFullYear() + 1);
     } else {
-      dateSelected.setMonth(dateSelected.getMonth() + 1);
+      newPeriod.setMonth(newPeriod.getMonth() + 1);
     }
-    return dateSelected;
+    return newPeriod;
   }
   function themeActions() {
     const classesList = [classes.actions];
@@ -68,28 +70,28 @@ export default function Header({
   }, /*#__PURE__*/React.createElement("button", {
     type: "button",
     className: classes.buttonLeft,
-    onClick: () => updateDate(changePeriodToLeft())
+    onClick: () => updatePeriod(changePeriodToLeft())
   }, /*#__PURE__*/React.createElement("img", {
     src: triangleImage,
     className: classes.triangleLeft,
     alt: "Left"
   })), /*#__PURE__*/React.createElement("button", {
     type: "button",
-    onClick: () => updateDate(new Date())
+    onClick: () => updatePeriod(new Date())
   }, /*#__PURE__*/React.createElement("img", {
     src: homeImage,
     className: classes.home,
     alt: "Home"
   })), /*#__PURE__*/React.createElement(SelectMonthNames, {
-    dateSelected: dateSelected,
-    updateDate: updateDate
+    period: period,
+    updatePeriod: updatePeriod
   }), /*#__PURE__*/React.createElement(SelectYears, {
-    dateSelected: dateSelected,
-    updateDate: updateDate
+    period: period,
+    updatePeriod: updatePeriod
   }), /*#__PURE__*/React.createElement("button", {
     type: "button",
     className: classes.buttonRight,
-    onClick: () => updateDate(changePeriodToRight())
+    onClick: () => updatePeriod(changePeriodToRight())
   }, /*#__PURE__*/React.createElement("img", {
     src: triangleImage,
     className: classes.trianglerRight,

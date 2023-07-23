@@ -6,14 +6,19 @@ import DayRow from './DayRow/DayRow';
  * Component containing list days of the calendar
  *
  * @param {Object}    props
- * @param {Date}      props.dateSelected
- * @param {Function}  props.updateInputDate
+ * @param {Date}      props.today              today's date
+ * @param {Date}      props.dateSelected       date selected by the user
+ * @param {Function}  props.updateSelectedDate callback to update date selected by the user
+ * @param {Date}      props.period             period of the calendar
+ * @param {Object}    props.themes             object containing css classes to custom theme
  *
- * @returns <DayNumbers dateSelected={ ... } updateInputDate={ ... } />
+ * @returns <DayNumbers dateSelected={ ... } updateSelectedDate={ ... } />
  */
 export default function DayNumbers({
+  today,
   dateSelected,
-  updateInputDate,
+  updateSelectedDate,
+  period,
   themes
 }) {
   /**
@@ -23,7 +28,7 @@ export default function DayNumbers({
    */
   function handleClickSelectDay(event) {
     const newDate = selectDay(event.target.dataset);
-    updateInputDate(newDate);
+    updateSelectedDate(newDate);
   }
 
   /**
@@ -38,12 +43,14 @@ export default function DayNumbers({
     if (event.code === 'Space') {
       event.preventDefault();
       const newDate = selectDay(event.target.dataset);
-      updateInputDate(newDate);
+      updateSelectedDate(newDate);
     }
   }
-  return /*#__PURE__*/React.createElement(React.Fragment, null, getCalendar(dateSelected).map((week, index) => /*#__PURE__*/React.createElement(DayRow, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, getCalendar(period).map((week, index) => /*#__PURE__*/React.createElement(DayRow, {
     key: index,
     week: week,
+    today: today,
+    period: period,
     dateSelected: dateSelected,
     handleClickSelectDay: event => handleClickSelectDay(event),
     handleKeySelectDay: event => handleKeySelectDay(event),

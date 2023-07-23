@@ -6,7 +6,7 @@ import classes from './DayNames.module.css';
  * Currently start from Sunday to Saturday
  *
  * @param {Object} props
- * @param {Object} props.themes
+ * @param {Object} props.themes object containing css classes to custom theme
  *
  * @returns <DayNames themes={ ... } />
  */

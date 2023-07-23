@@ -6,12 +6,15 @@ import DayRow from './DayRow/DayRow'
  * Component containing list days of the calendar
  *
  * @param {Object}    props
- * @param {Date}      props.dateSelected
- * @param {Function}  props.updateInputDate
+ * @param {Date}      props.today              today's date
+ * @param {Date}      props.dateSelected       date selected by the user
+ * @param {Function}  props.updateSelectedDate callback to update date selected by the user
+ * @param {Date}      props.period             period of the calendar
+ * @param {Object}    props.themes             object containing css classes to custom theme
  *
- * @returns <DayNumbers dateSelected={ ... } updateInputDate={ ... } />
+ * @returns <DayNumbers dateSelected={ ... } updateSelectedDate={ ... } />
  */
-export default function DayNumbers({ dateSelected, updateInputDate, themes }) {
+export default function DayNumbers({ today, dateSelected, updateSelectedDate, period, themes }) {
 
   /**
    * Handle click to select day in the calendar
@@ -21,7 +24,7 @@ export default function DayNumbers({ dateSelected, updateInputDate, themes }) {
   function handleClickSelectDay(event) {
     const newDate = selectDay(event.target.dataset)
 
-    updateInputDate(newDate)
+    updateSelectedDate(newDate)
   }
 
   /**
@@ -38,17 +41,19 @@ export default function DayNumbers({ dateSelected, updateInputDate, themes }) {
 
       const newDate = selectDay(event.target.dataset)
 
-      updateInputDate(newDate)
+      updateSelectedDate(newDate)
     }
   }
 
   return (
     <>
       {
-        getCalendar(dateSelected).map((week, index) => (
+        getCalendar(period).map((week, index) => (
           <DayRow
             key={ index }
             week={ week }
+            today={ today }
+            period={ period }
             dateSelected={ dateSelected }
             handleClickSelectDay={ event => handleClickSelectDay(event) }
             handleKeySelectDay={ event => handleKeySelectDay(event) }

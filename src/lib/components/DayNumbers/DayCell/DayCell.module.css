@@ -30,6 +30,11 @@
   cursor: pointer;
 }
 
+.today {
+  color: #303030;
+  background: rgb(255, 166, 0, .7);
+}
+
 .dayAnotherMonth {
   opacity: .5;
 }

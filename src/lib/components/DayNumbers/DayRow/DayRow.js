@@ -5,20 +5,22 @@ import DayCell from '../DayCell/DayCell'
  * Component to display row containing each day of a week
  *
  * @param {Object}   props
- * @param {Array}    props.week
- * @param {Date}     props.dateSelected
- * @param {Function} props.handleClickSelectDay
- * @param {Function} props.handleKeySelectDay
- * @param {Object}   props.themes
+ * @param {Array}    props.week                 array containg the days of the week
+ * @param {Date}     props.period               period of the calendar
+ * @param {Date}     props.dateSelected         date selected by the user
+ * @param {Function} props.handleClickSelectDay callback to change the date by click
+ * @param {Function} props.handleKeySelectDay   callback to change the date by keyboard key
+ * @param {Object}   props.themes               object containing css classes to custom theme
  *
  * @returns <DayRow
  *  week={ ... }
+ *  period={ ... }
  *  dateSelected={ ... }
  *  handleClickSelectDay={ ... }
  *  handleKeySelectDay={ ... }
  *  themes={ ... } />
  */
-export default function DayRow({ week, dateSelected, handleClickSelectDay, handleKeySelectDay, themes }) {
+export default function DayRow({ week, period, dateSelected, handleClickSelectDay, handleKeySelectDay, themes }) {
 
   return (
     <tr>
@@ -27,6 +29,7 @@ export default function DayRow({ week, dateSelected, handleClickSelectDay, handl
           <DayCell
             key={ index }
             currentDay={ day }
+            period={ period }
             dateSelected={ dateSelected }
             handleClickSelectDay={ handleClickSelectDay }
             handleKeySelectDay={ handleKeySelectDay }

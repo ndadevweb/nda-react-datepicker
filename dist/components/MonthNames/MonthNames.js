@@ -4,14 +4,14 @@ import React from 'react';
  * Display and update month selected
  *
  * @param {Object}   props
- * @param {Date}     props.dateSelected
- * @param {Function} props.updateDate
+ * @param {Date}     props.period       period of the calendar
+ * @param {Function} props.updatePeriod callback to update the date of the period
  *
- * @returns <MonthNames dateSelected={ ... } updateDate={ ... } />
+ * @returns <MonthNames period={ ... } updatePeriod={ ... } />
  */
 export default function MonthNames({
-  dateSelected,
-  updateDate
+  period,
+  updatePeriod
 }) {
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -21,11 +21,11 @@ export default function MonthNames({
    * @param {Number} indexOfMonth
    */
   function handleChangeMonth(indexOfMonth) {
-    dateSelected.setMonth(indexOfMonth);
-    updateDate(dateSelected);
+    period.setMonth(indexOfMonth);
+    updatePeriod(period);
   }
   return /*#__PURE__*/React.createElement("select", {
-    value: dateSelected.getMonth(),
+    value: period.getMonth(),
     onChange: event => handleChangeMonth(event.target.value)
   }, months.map((month, index) => /*#__PURE__*/React.createElement("option", {
     key: index,

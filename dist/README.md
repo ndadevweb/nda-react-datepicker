@@ -10,7 +10,7 @@ This component allows you to select a date, including day, month, and year.
 To interact with the component, three props, two of which are mandatory, are used
 
 - **dateSelected** containing a date in MM/DD/YYYY format
-- **updateInputDate** a callback function to interact with the parent component implements the DatePicker component
+- **updateSelectedDate** a callback function to interact with the parent component implements the DatePicker component
 - **themes** a literal object to entirely change the style of the DatePicker _(Optional)_
 
 **Currently only the US date allowed MM/DD/YYYY**
@@ -34,7 +34,7 @@ In your component
 
 ```
 import { useState } from 'react'
-import { DatePicker } from '@ndadevweb/nda-react-datepicker'
+import { DatePicker } from 'ndadevweb/nda-react-datepicker'
 import classesCustomDatePicker from './customThemeDatePicker.module.css'
 
 export default function YourComponent() {
@@ -46,7 +46,7 @@ export default function YourComponent() {
 
         <DatePicker
           dateSelected={ dateSelected }
-          updateInputDate={ (newDateSelected) => setDateSelected(newDateSelected) }
+          updateSelectedDate={ (newDateSelected) => setDateSelected(newDateSelected) }
           themes={ classesCustomDatePicker }
         />
       </>
@@ -132,6 +132,7 @@ Below all css classes can be override
 .customThemeDayCellDaySelected:hover {}
 
 .customThemeDayCellDayAnotherMonth {}
+
 ```
 
 ### DatePicker container
