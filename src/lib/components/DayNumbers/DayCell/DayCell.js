@@ -65,26 +65,36 @@ export default function DayCell({ currentDay, period, dateSelected, handleClickS
     const classesList = []
 
     // day
+    classesList.push(classes.day)
     if(themes?.customThemeDayCellDay !== undefined) {
-      classesList.push(...[classes.day, themes.customThemeDayCellDay])
-    } else {
-      classesList.push(classes.day)
+      classesList.push(themes.customThemeDayCellDay)
     }
 
+    // day selected
     if(isTodaySelected() === true) {
       classesList.push(classes.daySelected)
+
+      if(themes?.customThemeDayCellDaySelected !== undefined) {
+        classesList.push(themes.customThemeDayCellDaySelected)
+      }
     }
 
+    // today
     if(isToday() === true && isTodaySelected() === false) {
       classesList.push(classes.today)
+
+      if(themes?.customThemeDayCellDayToday !== undefined) {
+        classesList.push(themes.customThemeDayCellDayToday)
+      }
     }
 
+    // day of previous and next month
     if(+month !== period.getMonth() + 1) {
       classesList.push(classes.dayAnotherMonth)
-    }
 
-    if(themes?.customThemeDayCellDayAnotherMonth !== undefined && classesList.indexOf(classes.dayAnotherMonth) !== -1) {
-      classesList.push(themes.customThemeDayCellDayAnotherMonth)
+      if(themes?.customThemeDayCellDayAnotherMonth !== undefined) {
+        classesList.push(themes.customThemeDayCellDayAnotherMonth)
+      }
     }
 
     return classesList.join(' ')
